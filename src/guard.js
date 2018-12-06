@@ -3,6 +3,7 @@ const chalk = require('chalk')
 const constants = require('./constants')
 
 const errors = {
+  topic: chalk.red('Enter a valid commit topic'),
   title: chalk.red('Enter a valid commit title'),
   message: chalk.red('Enter a valid commit message'),
   referenceGithub: chalk.red(
@@ -11,8 +12,8 @@ const errors = {
   referenceJira: chalk.red('Enter the JIRA reference key, such as ABC-123')
 }
 
+const topic = (topic) => (!topic || topic.includes('`')) ? errors.topic : true
 const title = (title) => (!title || title.includes('`')) ? errors.title : true
-
 const message = (message) => message.includes('`') ? errors.message : true
 
 /**

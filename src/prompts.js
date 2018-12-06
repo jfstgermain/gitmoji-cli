@@ -2,6 +2,7 @@ const constants = require('./constants')
 const configVault = require('./config')
 const guard = require('./guard')
 const utils = require('./utils')
+const { spawnSync } = require( 'child_process' );
 
 const config = [
   {
@@ -31,6 +32,8 @@ const config = [
 ]
 
 const gitmoji = (gitmojis) => {
+  const gitBranchTicket = spawnSync( 'git', [ 'rev-parse --abbrev-ref HEAD | cut -d/ -f2 | cut -d- -f1,2 | tr \'[:lower:]\' \'[:upper:]\'']);
+
   return [
     {
       name: 'gitmoji',
@@ -50,6 +53,15 @@ const gitmoji = (gitmojis) => {
       }
     },
     {
+      name: 'topic',
+      message: 'Enter the topic name',
+      validate: guard.topic,
+      transformer: (input) => utils.inputCountTransformer(
+        input,
+        constants.TOPIC_MAX_LENGTH_COUNT
+      )
+    },
+    {
       name: 'title',
       message: 'Enter the commit title',
       validate: guard.title,
@@ -66,6 +78,7 @@ const gitmoji = (gitmojis) => {
     {
       name: 'reference',
       message: 'Issue / PR reference:',
+      default: gitBranchTicket.stdout.toString(),
       validate: (value) => guard.reference(value, configVault.getIssueFormat())
     }
   ]

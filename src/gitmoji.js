@@ -131,7 +131,7 @@ class GitmojiCli {
   }
 
   _commit (answers) {
-    const title = `${answers.gitmoji} ${answers.title}`
+    const title = `${answers.gitmoji} (${answers.topic}) ${answers.title}`
     const prefixReference = config.getIssueFormat() === constants.GITHUB
       ? '#'
       : ''
