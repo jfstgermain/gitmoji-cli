@@ -102,3 +102,5 @@ $ gitmoji -u
 Run `gitmoji -g` to setup some gitmoji-cli preferences, such as the auto `git add .` feature.
 
 ![gitmoji config](https://cloud.githubusercontent.com/assets/7629661/23577826/82e8745e-00c9-11e7-9d7e-623a0a51bff9.png)
+
+*
