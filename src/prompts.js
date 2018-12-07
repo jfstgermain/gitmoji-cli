@@ -35,7 +35,7 @@ const gitmoji = (gitmojis) => {
   const gitBranchTicket = spawnSync('git', ['rev-parse --abbrev-ref HEAD | cut -d/ -f2 | cut -d- -f1,2 | tr \'[:lower:]\' \'[:upper:]\''], {
     cwd: process.cwd(),
     shell: true,
-  }).stdout.toString();
+  }).stdout.toString().trim();
 
   return [
     {
