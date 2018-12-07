@@ -78,7 +78,7 @@ const gitmoji = (gitmojis) => {
     {
       name: 'reference',
       message: 'Issue / PR reference:',
-      default: gitBranchTicket.stdout.toString(),
+      default: gitBranchTicket,
       validate: (value) => guard.reference(value, configVault.getIssueFormat())
     }
   ]
