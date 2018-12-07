@@ -2,7 +2,7 @@ const constants = require('./constants')
 const configVault = require('./config')
 const guard = require('./guard')
 const utils = require('./utils')
-const { execSync } = require( 'child_process' );
+const { spawnSync } = require( 'child_process' );
 
 const config = [
   {
@@ -32,7 +32,10 @@ const config = [
 ]
 
 const gitmoji = (gitmojis) => {
-  const gitBranchTicket = execSync( 'git', [ 'rev-parse --abbrev-ref HEAD | cut -d/ -f2 | cut -d- -f1,2 | tr \'[:lower:]\' \'[:upper:]\'']);
+  const gitBranchTicket = spawnSync('git', ['rev-parse --abbrev-ref HEAD | cut -d/ -f2 | cut -d- -f1,2 | tr \'[:lower:]\' \'[:upper:]\''], {
+    cwd: process.cwd(),
+    shell: true,
+  }).stdout.toString();
 
   return [
     {
