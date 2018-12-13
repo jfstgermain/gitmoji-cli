@@ -22,9 +22,9 @@ const message = (message) => message.includes('`') ? errors.message : true
 * @param {Number} ref - Represents a github reference
 * @returns {Boolean}
 */
-const githubGuard = (ref) => ref.match(/(^[1-9][0-9]*)+$/)
+const githubGuard = (ref) => (ref == null || ref.match(/(^[1-9][0-9]*)+$/)
   ? true
-  : errors.referenceGithub
+  : errors.referenceGithub)
 
 /**
 * Checks that the given jira reference is valid
@@ -32,9 +32,9 @@ const githubGuard = (ref) => ref.match(/(^[1-9][0-9]*)+$/)
 * @param {Number} ref - Represents a jira reference
 * @returns {Boolean}
 */
-const jiraGuard = (ref) => ref.match(/^([A-Z][A-Z0-9]{1,9}-[0-9]+)$/g)
+const jiraGuard = (ref) => (ref == null || ref.match(/^([A-Z][A-Z0-9]{1,9}-[0-9]+)$/g)
   ? true
-  : errors.referenceJira
+  : errors.referenceJira)
 
 const reference = (reference, mode) => {
   if (!reference) return true
